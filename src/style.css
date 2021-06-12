@@ -48,7 +48,7 @@ section {
     border-bottom-right-radius: 5px;
 }
 
-.bottom-nav:hover, .top-icons {
+.bottom-nav:hover, .top-icons:hover, .top-nav:hover {
     cursor: pointer;
     user-select: none;
 }
@@ -88,6 +88,16 @@ section {
     margin-left: 54px;
 }
 
+#btn-folder:focus, #btn-user:focus, #btn-search:focus, #btn-settings:focus {
+    outline: 0 !important;
+}
+
+#btn-folder:hover, #btn-user:hover, #btn-search:hover, #btn-settings:hover {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
 #btn-folder {
     margin-left: 0px;
     background: url("../images/folder_img.png");
@@ -103,4 +113,9 @@ section {
 
 #btn-settings {
     background: url("../images/settings_img.png");
+}
+
+.navigation {
+    margin-left: -3px;
+    margin-top: 3%;
 }
