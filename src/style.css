@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+/* */
+h1 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    text-align: center;
+    color: #957dad;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* */
+section {
+    padding: 5%;
+    padding-top: 0;
+    height: 100vh;
+}
+
+.top-nav {
+    height: 32px;
+    width: 900px;
+    margin-left: 350px;
+    overflow: hidden;
+    background-color: #191919;
+    border-top-right-radius: 5px;
+}
+
+.side-nav {
+    position: absolute;
+    margin-top: -32px;
+    height: 733px;
+    width: 350px;
+    background: #383838e1;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.center-nav {
+    margin-left: 350px;
+}
+
+.bottom-nav {
+    height: 22px;
+    width: 900px;
+    margin-left: 350px;
+    overflow: hidden;
+    background-color: #383838fb;
+    border-bottom-right-radius: 5px;
+}
+
+.bottom-nav:hover, .top-icons {
+    cursor: pointer;
+    user-select: none;
+}
+
+.CodeMirror {
+    font-size: 18px;
+    width: 900px;
+    height: 679px;
+}
+
+#status-bar {
+    color: rgba(255, 255, 255, 0.4);
+    margin-left: 75%;
+}
+
+.top-icons {
+    margin-left: 6%;
+    margin-top: 3%;
+    color: white;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+}
+
+#control-icon {
+    margin-top: -2px;
+}
+
+.buttons {
+    margin-left: 6%;
+}
+
+#btn-folder, #btn-user, #btn-search, #btn-settings  {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    margin-left: 54px;
+}
+
+#btn-folder {
+    margin-left: 0px;
+    background: url("../images/folder_img.png");
+}
+
+#btn-user {
+    background: url("../images/user_img.png");
+}
+
+#btn-search {
+    background: url("../images/search_img.png");
+}
+
+#btn-settings {
+    background: url("../images/settings_img.png");
+}
