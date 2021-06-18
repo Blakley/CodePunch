@@ -5,7 +5,7 @@
   <p align="center">
     Type racer &amp; memory game for common programming interview questions
     <br />
-    <a href="https://blakley.github.io/Image-Rotation/"><strong>Online Demo »</strong></a>
+    <a href="https://blakley.github.io/Image-Rotation/"><strong>PLAY HERE »</strong></a>
     <br />
   </p>
 </p>
