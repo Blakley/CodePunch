@@ -1,42 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <title>Visualizer</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://use.fontawesome.com/45ff755216.js"></script>
+        <link rel="icon" type="image/png" href="../images/favicon.png"/>
+        <link rel="stylesheet" href="style.css" />
+        <title> CodePunch </title>
+
+        <!-- Code Mirror -->
+        <link rel="stylesheet" type="text/css" href="https://codemirror.net/lib/codemirror.css">
+        <script type="text/javascript" src="https://codemirror.net/lib/codemirror.js"></script>
+        <script type ="text/javascript" src="https://codemirror.net/mode/clike/clike.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.52.2/theme/material-darker.min.css">
     </head>
-    <body>
-        <nav>
-            <div class="navbar">
-                <i class='bx bx-menu'></i>
-                <div class="title"><a href="#">Algorithm Sorting Visualizer</a></div>
-                <div class="nav-links">
-                    <ul class="links">
-                        <li><a class = "sort-btn" onclick="visualize();"> Sort </a></li>
-                        <li>
-                            <a class = "algorithm-btn"> Algorithms </a>
-                            <ul class="htmlCss-sub-menu sub-menu">
-                                <li class = "item-list"><a onclick="choose_algorithm('bubble');">Bubble Sort</a></li>
-                                <li class = "item-list"><a>Quick Sort</a></li>
-                                <li class = "item-list"><a>Selection Sort</a></li>
-                                <li class = "item-list"><a>Insertion Sort</a></li>
-                                <li class = "item-list"><a>Merge Sort</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>           
-            </div>
-        </nav>
-        <div class = "content">
-            <div id="array"></div>
-        </div>
-        <div class="array-slider">
-            <a>Array Size</a>
-            <input type="range" value="0" min="0" max="100" id="slider">
-            <span id="output"></span>
-        </div>
-        <script src="index.js"></script>
-    </body>
+<body>
+    <nav class = "header">
+        <a class = "title" onclick="refresh();"> CodePunch &nbsp;</a>
+    </nav>
+    <div class = "content-area centered">
+        <div id = "timer" style="display: none;"> 00:00 </div>
+        <div class = "code-solution"> <textarea id = "solution-text"></textarea> </div>
+        <div class = "user-solution"> <textarea id = "user-text"></textarea> </div>
+    </div>
+    <div class="footer">Made by 🐜 Blakley<br>This project is open source, visit the
+        <a class = "github" href="https://github.com/Blakley/CodePunch" target="_blank"> repo.</a>
+    </div>
+    
+    <div class = "social_media">
+        <a href="https://github.com/Blakley"><span>Github</span></a>
+        <a href="https://www.linkedin.com/in/anthony-blakley/"><span>LinkedIn</span></a>
+        <a href="https://twitter.com/anthlone"><span>Twitter</span></a>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
 </html>
