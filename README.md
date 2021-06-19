@@ -4,7 +4,7 @@
 
   <p align="center">
       Code type racing game <br />
-<!--     <a href="https://blakley.github.io/CodePunch/"><strong>PLAY HERE »</strong></a> -->
+    <a href="https://blakley.github.io/CodePunch/"><strong>PLAY HERE »</strong></a>
     <br />
   </p>
 </p>
