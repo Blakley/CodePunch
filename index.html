@@ -19,8 +19,29 @@
     <nav class = "header">
         <a class = "title" onclick="refresh();"> CodePunch &nbsp;</a>
     </nav>
+    <div class = "problem_dialog centered" style="display: none;">
+        <button class="view-modal">Stats</button>
+        <div class="popup">
+            <header>
+                <span> Typing Stats </span>
+                <div class="close"><i class="uil uil-times"></i></div>
+            </header>
+            <div class="content">
+                <p> WPM </p>
+                <div class="field">
+                    <p id ="wpm"> 100 </p>
+                    <button id = "next_question">Next Question</button>
+                    <form class = "typing_modes">
+                          <input type="radio" class = "auto_mode"><label>Typing Mode: Auto</label>
+                          <input type="radio" class = "manual_mode" checked><label>Typing Mode: Manual</label>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
     <div class = "content-area centered">
-        <div id = "timer" style="display: none;"> 00:00 </div>
+        <div id = "timer" style="display: none"> 00:00 </div>
+        <div id = "problem_label" style="display: ''">Longest Substring Without Repeating Characters</div>
         <div class = "code-solution"> <textarea id = "solution-text"></textarea> </div>
         <div class = "user-solution"> <textarea id = "user-text"></textarea> </div>
     </div>
@@ -33,8 +54,6 @@
         <a href="https://www.linkedin.com/in/anthony-blakley/"><span>LinkedIn</span></a>
         <a href="https://twitter.com/anthlone"><span>Twitter</span></a>
     </div>
-
-
     <script src="script.js"></script>
 </body>
 </html>
