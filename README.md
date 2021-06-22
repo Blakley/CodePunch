@@ -26,3 +26,6 @@ Simply open the ```index.html``` file in your browser.
 
   - [Languages](https://www.w3schools.com/html/html_scripts.asp) - HTML, CSS, and JavaScript
   - [Additional Technologies](https://codemirror.net/) - CodeMirror
+
+### Todo:
+  - Use cookies to store users wpm for completed problems.
