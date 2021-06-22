@@ -9,6 +9,10 @@
   </p>
 </p>
 
+<p align="center">
+  <img src="https://media.giphy.com/media/PISpzNtuhdskFcUnhz/giphy.gif" width=700>
+</p>
+
 ## Getting Started
 
 These instructions will give you a copy of the project up and running on
