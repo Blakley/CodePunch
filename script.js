@@ -745,6 +745,7 @@ window.onload = function ()
     }
 
     function compare_solution(change) { 
+        
         let expected_char = solution[line_index][char_index];
         if (expected_char == change.text[0]) {          
             correct_input += expected_char; // good
@@ -803,7 +804,7 @@ window.onload = function ()
                 reset_vars();
                 document.getElementsByClassName("problem_dialog")[0].style.display = "";
                 document.getElementsByClassName("view-modal")[0].click();
-
+                
                 if (manual_mode == false)
                     setTimeout(function(){ document.getElementById("next_question").click(); }, 7000);
             }
@@ -826,7 +827,7 @@ window.onload = function ()
     let problem = problems[random_index];
     solution = problem;
     current_problem = titles[random_index];
-    
+
     for (let i = 0; i < problem.length; i++) {
         solution_editor.replaceRange(problem[i] + '\n', {line: Infinity});
     }
