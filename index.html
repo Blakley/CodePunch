@@ -19,7 +19,7 @@
     <nav class = "header">
         <a class = "title" onclick="refresh();"> CodePunch &nbsp;</a>
     </nav>
-    
+    <p class = "centered" id = "user_avg_wpm"></p>
     <div class = "problem_dialog centered" style="display: none;">
         <button class="view-modal" style="display: none;"></button>
         <div class="popup">
@@ -29,6 +29,7 @@
             </header>
             <div class="content">
                 <p class = "centered" id = "wpm_str"></p>
+                
                 <div class="field">
                     <button id = "try_again" onclick="try_again();">Try Again</button>
                     <button id = "next_question" onclick="new_problem();">Continue</button>

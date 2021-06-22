@@ -1,3 +1,32 @@
+// cookies
+function store_cookie(name, value, days) {
+    console.log("storing cookie");
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+function get_cookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    console.log("cookie not found");
+    return null;
+}
+
+function remove_cookie(name) {   
+    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
 // timer
 var seconds = 00; 
 var tens = 00; 
@@ -686,6 +715,11 @@ let user_editor, user_element;
 /* setup editor functionality */
 window.onload = function () 
 {    
+    // get avg wpm cookie if found
+    let wpm_cookie = get_cookie('_avg_wpm_');
+    if (wpm_cookie)
+        document.getElementById("user_avg_wpm").innerHTML = wpm_cookie;
+    
     solution_element = document.getElementById('solution-text');
     solution_editor =  CodeMirror.fromTextArea(solution_element, code_options);
     solution_editor.setOption("mode", "text/x-csharp");
@@ -729,6 +763,15 @@ window.onload = function ()
             event.preventDefault();
     });
 
+    /* calculates the users avg wpm */
+    function avg_wpm() {
+        let avg = 0;
+        let wpm_cookie = document.getElementById("user_avg_wpm").innerHTML;
+        avg = (user_wpm + wpm_cookie) / 2;
+        document.getElementById("user_avg_wpm").innerHTML = avg;
+        store_cookie('_avg_wpm_', avg, '365');
+    }
+
     function update_wpm() {
         document.getElementById("wpm_str").innerHTML = "WPM: " + user_wpm;
     }
@@ -738,9 +781,28 @@ window.onload = function ()
         user_wpm = Math.round(((chars_typed / seconds) * 60) / 5);
     }
 
+    function solution_reached() {
+        update_wpm();
+
+        let wpm_cookie = get_cookie('_avg_wpm_');
+        if (!wpm_cookie)
+            store_cookie('_avg_wpm_', user_wpm, '365');
+        else 
+            avg_wpm();
+    
+        stop_timer();
+        reset_vars();
+        document.getElementsByClassName("problem_dialog")[0].style.display = "";
+        document.getElementsByClassName("view-modal")[0].click(); 
+
+        if (manual_mode == false)
+            setTimeout(function(){ document.getElementById("next_question").click(); }, 7000);        
+    }
+
     function compare_solution(change) { 
         
         let expected_char = solution[line_index][char_index];
+        
         if (expected_char == change.text[0]) {          
             correct_input += expected_char; // good
             char_index += 1; 
@@ -771,15 +833,7 @@ window.onload = function ()
                         line_index += 1;
                 }                 
             } catch (error) {
-                // solution reached. Reset & Open complete-dialog
-                update_wpm();
-                stop_timer();
-                reset_vars();
-                document.getElementsByClassName("problem_dialog")[0].style.display = "";
-                document.getElementsByClassName("view-modal")[0].click(); 
-
-                if (manual_mode == false)
-                    setTimeout(function(){ document.getElementById("next_question").click(); }, 7000);
+                solution_reached();
             }
             
             // handle spaces at beginning of non-empty:
@@ -792,15 +846,7 @@ window.onload = function ()
                 }    
             } 
             catch (error) {
-                // solution reached. Reset & Open complete-dialog
-                update_wpm();
-                stop_timer();
-                reset_vars();
-                document.getElementsByClassName("problem_dialog")[0].style.display = "";
-                document.getElementsByClassName("view-modal")[0].click();
-                
-                if (manual_mode == false)
-                    setTimeout(function(){ document.getElementById("next_question").click(); }, 7000);
+                solution_reached();
             }
         }
     }
@@ -815,7 +861,8 @@ window.onload = function ()
         compare_solution(change);
     });
 
-    let random_index = Math.floor(Math.random() * problems.length);
+    // let random_index = Math.floor(Math.random() * problems.length);
+    let random_index = 15;
     problem_index = random_index;
     let problem = problems[random_index];
     solution = problem;
