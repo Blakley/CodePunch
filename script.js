@@ -75,7 +75,6 @@ var titles = [
     'Valid Palindrome', // 23
     'Contains Duplicate', // 24
     'Reverse String', // 25
-    'Test Function'
 ];
 
 var problems = [
@@ -668,11 +667,6 @@ var problems = [
         "        (s[left], s[right]) = (s[right--], s[left++]);",
         "}",
     ],
-    [
-        "public void Test(int t) {",
-        "   ",
-        "}",    
-    ]
 ];
 
 let code_options = {
@@ -821,8 +815,7 @@ window.onload = function ()
         compare_solution(change);
     });
 
-    // let random_index = Math.floor(Math.random() * problems.length);
-    let random_index = 25;
+    let random_index = Math.floor(Math.random() * problems.length);
     problem_index = random_index;
     let problem = problems[random_index];
     solution = problem;
