@@ -1,6 +1,53 @@
-// globals
+// timer
+var seconds = 00; 
+var tens = 00; 
+var appendTens = document.getElementById("tens")
+var appendSeconds = document.getElementById("seconds")
+var Interval;
+
+function startTimer () {
+    tens += 1;  
+    if(tens <= 9)
+      appendTens.innerHTML = "0" + tens;
+   
+    if (tens > 9)
+      appendTens.innerHTML = tens;
+
+    if (tens > 99) {
+      seconds += 1;
+      appendSeconds.innerHTML = "0" + seconds;
+      tens = 0;
+      appendTens.innerHTML = "0" + 0;
+    }
+    
+    if (seconds > 9)
+      appendSeconds.innerHTML = seconds;
+}
+
+function start_timer() {
+    clearInterval(Interval);
+    Interval = setInterval(startTimer, 10);
+}
+
+function stop_timer() {
+    clearInterval(Interval);
+}
+
+function reset_timer() {
+    clearInterval(Interval);
+    seconds = 00; 
+    tens = 00; 
+    appendTens.innerHTML = '00';
+  	appendSeconds.innerHTML = '00';   
+}
+
+// editor / code
 var current_problem = "";
 var solution = [];
+var manual_mode = true;
+var timer_started = 0;
+var next_problem = false;
+var problem_index = 0;
 
 var titles = [
     'Two Sum', // 1
@@ -27,7 +74,8 @@ var titles = [
     'Maximum Depth of Binary Tree', // 22
     'Valid Palindrome', // 23
     'Contains Duplicate', // 24
-    'Reverse String' // 25
+    'Reverse String', // 25
+    'Test Function'
 ];
 
 var problems = [
@@ -445,9 +493,12 @@ var problems = [
         "    while (true) {",
         "        if (set.Contains(n))",
         "            return false;",
+        "   ",
         "        set.Add(n);",
         "        n = SquareSum(Digits(n));",
-        "        if (n == 1) return true;",
+        "   ",
+        "        if (n == 1)",
+        "           return true;",
         "    }",
         "    ",
         "    int[] Digits(int i) => i.ToString().ToCharArray().Select(c => c - '0').ToArray();",
@@ -616,6 +667,11 @@ var problems = [
         "    while (left < right)",
         "        (s[left], s[right]) = (s[right--], s[left++]);",
         "}",
+    ],
+    [
+        "public void Test(int t) {",
+        "   ",
+        "}",    
     ]
 ];
 
@@ -640,18 +696,27 @@ window.onload = function ()
     solution_editor =  CodeMirror.fromTextArea(solution_element, code_options);
     solution_editor.setOption("mode", "text/x-csharp");
     solution_editor.setOption("readOnly", "true");
-    solution_editor.setSize(850, 700);
+    solution_editor.setSize(1200, 650);
     
     user_element = document.getElementById('user-text');
     user_editor = CodeMirror.fromTextArea(user_element, code_options);
     user_editor.setOption("mode", "text/x-csharp");
-    user_editor.setSize(850, 700);
+    user_editor.setSize(1200, 40);
 
     var char_index = 0;
     var line_index = 0;
     var correct_input = ""; // correctly typed input thus far
-    var last_good_index = 0;
-    var can_enter = false; // enter key
+    var user_wpm = 0;
+    var chars_typed = 0;
+
+    function reset_vars() {
+        char_index = 0;
+        chars_typed = 0;
+        user_wpm = 0;
+        line_index = 0;
+        correct_input = "";
+        user_editor.setValue(correct_input);
+    }
 
     // prevent code paste
     user_editor.on("beforeChange", function(_, change) {
@@ -665,74 +730,99 @@ window.onload = function ()
         if (event.keyCode == 8) 
             event.preventDefault();
         
-        // prevent enter-key until end-of-line
-        if (event.keyCode == 13) {
-            if (can_enter) {
-                console.log("You can go ahead");
-                can_enter = false;
-            }
-            else {
-                console.log("You can't enter bruh.");
-                event.preventDefault();
-            }    
-                
-        }
+        // prevent enter
+        if (event.keyCode == 13) 
+            event.preventDefault();
     });
+
+    function update_wpm() {
+        document.getElementById("wpm_str").innerHTML = "WPM: " + user_wpm;
+    }
+
+    function calculate_wpm() {
+        let seconds = document.getElementById("seconds").innerHTML;
+        user_wpm = Math.round(((chars_typed / seconds) * 60) / 5);
+    }
 
     function compare_solution(change) { 
         let expected_char = solution[line_index][char_index];
-
-        console.log("expected_char: " + expected_char);
-
-        if (expected_char == change.text[0]) {
+        if (expected_char == change.text[0]) {          
             correct_input += expected_char; // good
-            last_good_index += 1;
+            char_index += 1; 
+            chars_typed += 1;
+            calculate_wpm();
         }
         else {
             // delete/replace incorrect input
             user_editor.setValue(correct_input) // replace with correct text thus far
             user_editor.focus(); // Set the cursor at the end of existing content
             user_editor.setCursor(user_editor.lineCount(), 0);
-            char_index = last_good_index;
             return;
         }
-        char_index += 1;  
-
+         
         // determine if we move to next line
         if (char_index == solution[line_index].length) {
-            console.log("end: " + char_index + ", " + solution[line_index][char_index-1]);
+
             char_index = 0;
             line_index += 1;
-
-            // enable enter press
-            can_enter = true;
+            user_editor.setValue("");
+            correct_input = "";
 
             // handle empty lines
-            if (solution[line_index] == "    ") {
-                console.log("empty line found!");
-                // increase line_index again,
-            }
+            try {
+                if (!solution[line_index].includes("}")) {
+                    var trim = solution[line_index].trim();
+                    if (trim.length == 0)
+                        line_index += 1;
+                }                 
+            } catch (error) {
+                // solution reached. Reset & Open complete-dialog
+                update_wpm();
+                stop_timer();
+                reset_vars();
+                document.getElementsByClassName("problem_dialog")[0].style.display = "";
+                document.getElementsByClassName("view-modal")[0].click(); 
 
-            // handle spaces at beginning of next line:
-            correct_input += '\n';
-            for (let i = 0; i < solution[line_index].length; i++) {
-                if (solution[line_index][i] == ' ') {
-                    correct_input += ' ';
-                    char_index += 1;
-                }
-                else
-                    break;
+                if (manual_mode == false)
+                    setTimeout(function(){ document.getElementById("next_question").click(); }, 7000);
+            }
+            
+            // handle spaces at beginning of non-empty:
+            try {
+                for (let i = 0; i < solution[line_index].length; i++) {
+                    if (solution[line_index][i] == ' ')
+                        char_index += 1;
+                    else
+                        break;
+                }    
+            } 
+            catch (error) {
+                // solution reached. Reset & Open complete-dialog
+                update_wpm();
+                stop_timer();
+                reset_vars();
+                document.getElementsByClassName("problem_dialog")[0].style.display = "";
+                document.getElementsByClassName("view-modal")[0].click();
+
+                if (manual_mode == false)
+                    setTimeout(function(){ document.getElementById("next_question").click(); }, 7000);
             }
         }
-
     }
 
     // handle user input
     user_editor.on("inputRead", function(_, change) {
+        // start counter initially
+        if (timer_started == 0) {
+            timer_started = 1;
+            start_timer();
+        }
         compare_solution(change);
     });
 
-    let random_index = Math.floor(Math.random() * problems.length );
+    // let random_index = Math.floor(Math.random() * problems.length);
+    let random_index = 25;
+    problem_index = random_index;
     let problem = problems[random_index];
     solution = problem;
     current_problem = titles[random_index];
@@ -765,6 +855,45 @@ viewBtn.onclick = ()=> {
   popup.classList.toggle("show");
 }
 
-close.onclick = ()=>{
-  viewBtn.click();
+/* Try current problem again */
+function try_again() {
+    reset_timer();
+    timer_started = 0;
+    document.getElementsByClassName("problem_dialog")[0].style.display = "none";
+    document.getElementsByClassName("view-modal")[0].style.display = "none";
+    viewBtn.click();
+}
+
+/* Load next problem */
+function new_problem() {
+    let new_index = 0;
+    while (true) {
+        new_index = Math.floor(Math.random() * problems.length);
+        if (new_index != problem_index)
+            break;
+    }
+
+    let problem = problems[new_index];
+    solution = problem;
+    current_problem = titles[new_index];
+    
+    problem_label();
+    try {
+        solution_editor.setValue("");
+        for (let i = 0; i < problem.length; i++) {
+            solution_editor.replaceRange(problem[i] + '\n', {line: Infinity});
+        }
+    }
+    catch(e) {
+        console.log(e);
+    }
+    try_again();
+}
+
+/* Change typing mode */
+function radio_check(mode) {
+    if (mode == 'manual')
+        manual_mode = true;
+    else
+        manual_mode = false;
 }
