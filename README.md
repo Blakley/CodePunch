@@ -25,4 +25,4 @@ Simply open the ```index.html``` file in your browser.
 ## Built With
 
   - [Languages](https://www.w3schools.com/html/html_scripts.asp) - HTML, CSS, and JavaScript
-  - [Technologies](https://codemirror.net/) - CodeMirror
+  - [Additional Technologies](https://codemirror.net/) - CodeMirror
