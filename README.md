@@ -15,6 +15,9 @@ The code editor we use comes from `codemirror` which you can read more about [he
 * Code highlighting using `codemirror` as our input form
 * Custom calculated typing average (WPM)
 
+## Built With
+  - [Languages](https://www.w3schools.com/html/html_scripts.asp) - HTML, CSS, and JavaScript
+  
 ## Todo:
   - Use cookies to store users wpm for completed problems
   - Implement other langauges. Current only `C#` excerpts are presented
@@ -22,3 +25,4 @@ The code editor we use comes from `codemirror` which you can read more about [he
 ## Deployment
 
 Simply open the `index.html` file in your browser
+
