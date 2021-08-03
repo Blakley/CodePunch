@@ -1,31 +1,25 @@
-<br />
-<p align="center">
-  <h3 align="center"> CodePunch </h3>
+# CodePunch
 
-  <p align="center">
-      Code typing game <br />
-    <a href="https://blakley.github.io/CodePunch/"><strong>« —— Try It  ——»</strong></a>
-    <br />
-  </p>
+A Code typing game for the C# Language.
+The premise of this project was to create a standard typing game.
+However, the excerpts that the user will type comes from solutions to
+popular coding-interview practice problems. All of which can be [found here] (https://leetcode.com/problemset/all/?listId=79h8rn6)
+The code editor we use is `codemirror` which you can read more about [here] (https://codemirror.net/)
+
+## Demo <a href="https://blakley.github.io/CodePunch/"><strong>Play Here</strong></a>
+<p align="center">
+  <img src="https://gyazo.com/1f68daa6507002a8edddfc8b5b2a4cb2" width=500>
 </p>
 
-<p align="center">
-  <img src="https://media.giphy.com/media/PISpzNtuhdskFcUnhz/giphy.gif" width=700>
-</p>
+## Features
 
-## Getting Started
-
-These instructions will give you a copy of the project up and running on
-your local machine for development and testing purposes.
-
-## Deployment
-
-Simply open the ```index.html``` file in your browser.
-
-## Built With
-
-  - [Languages](https://www.w3schools.com/html/html_scripts.asp) - HTML, CSS, and JavaScript
-  - [Additional Technologies](https://codemirror.net/) - CodeMirror
+* Code highlighting using codemirror as our input form
+* Custom calculated typing average (WPM)
 
 ### Todo:
   - Use cookies to store users wpm for completed problems.
+  - Implement other langauges
+
+## Deployment
+
+Simply open the `index.html` file in your browser.
