@@ -16,9 +16,9 @@ The code editor we use comes from `codemirror` which you can read more about [he
 * Custom calculated typing average (WPM)
 
 ### Todo:
-  - Use cookies to store users wpm for completed problems.
+  - Use cookies to store users wpm for completed problems
   - Implement other langauges (current only c#)
 
 ## Deployment
 
-Simply open the `index.html` file in your browser.
+Simply open the `index.html` file in your browser
