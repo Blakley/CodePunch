@@ -15,7 +15,7 @@ The code editor we use comes from `codemirror` which you can read more about [he
 * Code highlighting using `codemirror` as our input form
 * Custom calculated typing average (WPM)
 
-### Todo:
+## Todo:
   - Use cookies to store users wpm for completed problems
   - Implement other langauges. Current only `C#` excerpts are presented
 
