@@ -17,7 +17,7 @@ The code editor we use comes from `codemirror` which you can read more about [he
 
 ### Todo:
   - Use cookies to store users wpm for completed problems
-  - Implement other langauges (current only c#)
+  - Implement other langauges. Current only c excerpts are presented
 
 ## Deployment
 
