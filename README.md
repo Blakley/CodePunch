@@ -12,12 +12,12 @@ The code editor we use comes from `codemirror` which you can read more about [he
 
 ## Features
 
-* Code highlighting using codemirror as our input form
+* Code highlighting using `codemirror` as our input form
 * Custom calculated typing average (WPM)
 
 ### Todo:
   - Use cookies to store users wpm for completed problems
-  - Implement other langauges. Current only c excerpts are presented
+  - Implement other langauges. Current only `C#` excerpts are presented
 
 ## Deployment
 
